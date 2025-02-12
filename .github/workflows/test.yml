@@ -8,5 +8,13 @@ on:
       - main
 
 jobs:
+  todo-check:
+    if: github.event_name == 'push' && github.ref != 'refs/head/main'
+    uses: sensirion/.github/.github/workflows/driver.common.todo_check.yml@main
+
+  dg-metadata-validation:
+    if: github.event_name == 'push' && github.ref != 'refs/head/main'
+    uses: sensirion/.github/.github/workflows/driver.generated.metadata_check.yml@main
+
   test:
     uses: sensirion/.github/.github/workflows/driver.python.test.yml@main

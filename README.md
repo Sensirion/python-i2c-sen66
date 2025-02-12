@@ -16,7 +16,7 @@ The default I²C address of [SEN66](https://www.sensirion.com/products/catalog/S
 
 ## Connect the sensor
 
-You can connect your sensor over a [SEK-SensorBridge](https://developer.sensirion.com/product-support/sek-sensorbridge/).
+You can connect your sensor over a [SEK-SensorBridge](https://developer.sensirion.com/sensirion-products/sek-sensorbridge/).
 For special setups you find the sensor pinout in the section below.
 
 <details><summary>Sensor pinout</summary>
@@ -30,8 +30,8 @@ For special setups you find the sensor pinout in the section below.
 | 2 | black | GND | Ground |
 | 3 | green | SDA | I2C: Serial data input / output | TTL 5V compatible
 | 4 | yellow | SCL | I2C: Serial clock input | TTL 5V compatible
-| 5 |  | GND | Ground | Do not connect (Pins 2 and 5 are connected internally)
-| 6 |  | VDD | Supply Voltage | Do not connect (Pins 1 and 6 are connected internally)
+| 5 |  | NC | Do not connect | Ground (Pins 2 and 5 are connected internally)
+| 6 |  | NC | Do not connect | Supply voltage (Pins 1 and 6 are connected internally)
 
 
 </p>
