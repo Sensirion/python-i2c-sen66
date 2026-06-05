@@ -4,11 +4,12 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+
 import os
 import sys
 from datetime import datetime
 
-import pkg_resources
+import importlib.metadata as metadata
 import sphinx.ext.autodoc
 
 import sensirion_i2c_sen66
@@ -17,16 +18,16 @@ import sensirion_i2c_sen66
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # -- Project information -----------------------------------------------------
-distribution = pkg_resources.get_distribution('sensirion_i2c_sen66')
+distribution = metadata.distribution("sensirion_i2c_sen66")
 
-project = u'sensirion_i2c_sen66'
+project = distribution.name
 copyright = u'{} Sensirion AG, Switzerland'.format(datetime.now().year)
 author = 'Sensirion AG'
 
 # The short X.Y version
-version = sensirion_i2c_sen66.__version__
+version = distribution.version
 # The full version, including alpha/beta/rc tags
-release = sensirion_i2c_sen66.__version__
+release = distribution.version
 
 # -- General configuration ---------------------------------------------------
 
