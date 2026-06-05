@@ -34,29 +34,31 @@ with ShdlcSerialPort(port=args.serial_port, baudrate=460800) as port:
                          slave_address=0x6B,
                          crc=CrcCalculator(8, 0x31, 0xff, 0x0))
     sensor = Sen66Device(channel)
-    sensor.device_reset()
-    time.sleep(1.2)
-    serial_number = sensor.get_serial_number()
-    print(f"serial_number: {serial_number}; "
-          )
+    try:
+        sensor.stop_measurement()
+        time.sleep(0.05)
+
+    except:  # noqa
+        print("stop measurement not successful"
+              )
+
     sensor.start_continuous_measurement()
-    time.sleep(1.1)
+    time.sleep(1.0)
     for i in range(100):
-        try:
-            time.sleep(1.0)
-            (mass_concentration_pm1p0, mass_concentration_pm2p5, mass_concentration_pm4p0, mass_concentration_pm10p0, humidity,
-             temperature, voc_index, nox_index, co2
-             ) = sensor.read_measured_values()
-            print(f"mass_concentration_pm1p0: {mass_concentration_pm1p0}; "
-                  f"mass_concentration_pm2p5: {mass_concentration_pm2p5}; "
-                  f"mass_concentration_pm4p0: {mass_concentration_pm4p0}; "
-                  f"mass_concentration_pm10p0: {mass_concentration_pm10p0}; "
-                  f"humidity: {humidity}; "
-                  f"temperature: {temperature}; "
-                  f"voc_index: {voc_index}; "
-                  f"nox_index: {nox_index}; "
-                  f"co2: {co2}; "
+        (padding, data_ready
+         ) = sensor.get_data_ready()
+        if data_ready:
+
+            #         Readout raw data from the sensor
+            (raw_humidity, raw_temperature, raw_voc, raw_nox, raw_co2
+             ) = sensor.read_measured_raw_values()
+            print(f"Raw humidity: {raw_humidity}"
                   )
-        except BaseException:
-            continue
-    sensor.stop_measurement()
+            print(f"Raw temperature: {raw_temperature}"
+                  )
+            print(f"Raw VOC index: {raw_voc}"
+                  )
+            print(f"Raw NOX index: {raw_nox}"
+                  )
+            print(f"Raw CO₂: {raw_co2}"
+                  )

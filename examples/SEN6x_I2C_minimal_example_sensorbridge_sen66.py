@@ -34,29 +34,40 @@ with ShdlcSerialPort(port=args.serial_port, baudrate=460800) as port:
                          slave_address=0x6B,
                          crc=CrcCalculator(8, 0x31, 0xff, 0x0))
     sensor = Sen66Device(channel)
-    sensor.device_reset()
-    time.sleep(1.2)
-    serial_number = sensor.get_serial_number()
-    print(f"serial_number: {serial_number}; "
-          )
+    try:
+        sensor.stop_measurement()
+        time.sleep(0.05)
+
+    except:  # noqa
+        print("stop measurement not successful"
+              )
+
     sensor.start_continuous_measurement()
-    time.sleep(1.1)
+    time.sleep(1.0)
     for i in range(100):
-        try:
-            time.sleep(1.0)
-            (mass_concentration_pm1p0, mass_concentration_pm2p5, mass_concentration_pm4p0, mass_concentration_pm10p0, humidity,
-             temperature, voc_index, nox_index, co2
-             ) = sensor.read_measured_values()
-            print(f"mass_concentration_pm1p0: {mass_concentration_pm1p0}; "
-                  f"mass_concentration_pm2p5: {mass_concentration_pm2p5}; "
-                  f"mass_concentration_pm4p0: {mass_concentration_pm4p0}; "
-                  f"mass_concentration_pm10p0: {mass_concentration_pm10p0}; "
-                  f"humidity: {humidity}; "
-                  f"temperature: {temperature}; "
-                  f"voc_index: {voc_index}; "
-                  f"nox_index: {nox_index}; "
-                  f"co2: {co2}; "
+        (padding, data_ready
+         ) = sensor.get_data_ready()
+        if data_ready:
+
+            #         Readout data from the sensor
+            (mass_concentration_pm1p0, mass_concentration_pm2p5, mass_concentration_pm4p0, mass_concentration_pm10p0,
+             ambient_humidity, ambient_temperature, voc_index, nox_index, co2
+             ) = sensor.read_measured_values_as_integers()
+            print(f"Mass concentration pm1p0 [µg/m³]: {mass_concentration_pm1p0 / 10.0}"
                   )
-        except BaseException:
-            continue
-    sensor.stop_measurement()
+            print(f"Mass concentration pm2p5 [µg/m³]: {mass_concentration_pm2p5 / 10.0}"
+                  )
+            print(f"Mass concentration pm4p0 [µg/m³]: {mass_concentration_pm4p0 / 10.0}"
+                  )
+            print(f"Mass concentration pm10p0 [µg/m³]: {mass_concentration_pm10p0 / 10.0}"
+                  )
+            print(f"Ambient humidity [%]: {ambient_humidity / 100.0}"
+                  )
+            print(f"Ambient temperature [°C]: {ambient_temperature / 200.0}"
+                  )
+            print(f"VOC index: {voc_index}"
+                  )
+            print(f"NOX index: {nox_index}"
+                  )
+            print(f"CO₂ [ppm]: {co2}"
+                  )
