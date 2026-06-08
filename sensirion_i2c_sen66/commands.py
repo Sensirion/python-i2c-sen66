@@ -7,7 +7,7 @@
 #
 # Generator:     sensirion-driver-generator 1.7.0
 # Product:       sen66
-# Model-Version: 1.7.1
+# Model-Version: 1.7.3
 #
 """
 The transfer classes specify the data that is transferred between host and sensor. The generated transfer classes
@@ -586,7 +586,7 @@ class ReadMeasuredValuesAsIntegers(Transfer):
     0x7FFF for int16).
     """
 
-    CMD_ID = 0x414
+    CMD_ID = 0x300
 
     def pack(self):
         return self.tx_data.pack([])

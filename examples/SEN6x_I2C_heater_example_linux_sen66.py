@@ -7,7 +7,7 @@
 #
 # Generator:     sensirion-driver-generator 1.7.0
 # Product:       sen66
-# Model-Version: 1.7.1
+# Model-Version: 1.7.3
 #
 
 import argparse
@@ -34,7 +34,6 @@ with LinuxI2cTransceiver(args.i2c_port) as i2c_transceiver:
               )
 
     sensor.activate_sht_heater()
-    humi = 0
     while True:
         time.sleep(0.05)
         (humi, t
