@@ -7,7 +7,7 @@
 #
 # Generator:     sensirion-driver-generator 1.7.0
 # Product:       sen66
-# Model-Version: 1.7.1
+# Model-Version: 1.7.3
 #
 
 import argparse
@@ -43,7 +43,6 @@ with ShdlcSerialPort(port=args.serial_port, baudrate=460800) as port:
               )
 
     sensor.activate_sht_heater()
-    humi = 0
     while True:
         time.sleep(0.05)
         (humi, t
