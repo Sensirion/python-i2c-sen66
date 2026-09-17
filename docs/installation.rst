@@ -3,10 +3,7 @@
 Installation
 ============
 
-The package can be installed with pip:
+It is assumed that you have a working Python installation on your system. 
+If not, please install Python first including `pip <https://pip.pypa.io/en/stable/installation/>`_.
 
-.. sourcecode:: bash
-
-    pip install sensirion_i2c_sen66
-
-Recommended usage is within a virtualenv.
+.. include:: driver-installation.rst

@@ -5,7 +5,7 @@ Unit tests can be run with `pytest <https://pytest.org>`_:
 
 .. code-block:: bash
 
-    pip install -e .[test]                       # Install requirements
+    pip install -e .[test]                       # Install test requirements
 
 
 We provide a mock implementation that allows you to execute the tests for SEN66 without hardware.
@@ -25,7 +25,4 @@ attached to COM1 you can start the tests with the following command:
 
 .. note::
     The SensorBridge must have default settings (baudrate 460800, address 0)
-
-
-
 
