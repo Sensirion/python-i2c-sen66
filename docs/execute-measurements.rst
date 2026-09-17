@@ -1,27 +1,32 @@
-Execute measurements with SensorBridge
-=======================================
+Install the SEN66 Driver
+------------------------
 
-The following steps show how to use this driver on a Windows system using the `Sensirion SEK-SensorBridge`_ to
-execute a simple measurement.
+.. include:: driver-installation.rst
 
-1. Install the SEN66 driver and all required packages as described in :ref:`Installation`.
-2. Install the driver for the `Sensirion SEK-SensorBridge`_
 
-   .. sourcecode:: bash
+Use the SensorBridge on Windows
+-------------------------------
 
-        pip install sensirion-shdlc-sensorbridge
+1. Install the driver for the `Sensirion SEK-SensorBridge`_:
 
-3. Connect the SEK-SensorBridge to your PC over USB
+   .. code-block:: console
 
-   a. If the SEK-SensorBridge is not detected by your system, follow the  `SensorBridge FTDI Driver Installation`_
+      python -m pip install sensirion-shdlc-sensorbridge
 
-4. Connect the SEN66 sensor to the SEK-SensorBridge
-5. Run the example script from the root of the repository.
+2. Connect the SEK-SensorBridge to your PC over USB.
 
-   By default the script assumes the SensorBridge is connected to :code:`COM1` serial port. If this is different on your system,
-   pass the port in use with the :code:`--serial-port` parameter as outlined below.
+   If the SEK-SensorBridge is not detected by your system, follow the
+   `SensorBridge FTDI Driver Installation`_.
 
-   .. sourcecode:: bash
+3. Connect the SEN66 sensor to the SEK-SensorBridge.
+
+4. Run the example script from the root of the repository.
+
+   By default, the script assumes that the SensorBridge is connected to the
+   ``COM1`` serial port. If a different port is used, specify it with the
+   ``--serial-port`` parameter:
+
+   .. code-block:: console
 
         python examples/example_usage_sensorbridge_sen66.py --serial-port <your COM port>
 
@@ -35,20 +40,23 @@ Example script
 .. literalinclude:: ../examples/example_usage_sensorbridge_sen66.py
     :language: python
 
-Execute measurements using internal Linux I²C driver
-====================================================
 
-On Linux systems it is furthermore possible to use the Linux user space I²C driver directly.
-How this can be done is shown in the following.
+Use the Linux I²C Driver
+------------------------
 
-1. Install the SEN66 driver and all required packages as described in :ref:`Installation`.
-2. Connect the SEN66 sensor to the I²C port of your system (for example to the I²C port 1 of a Raspberry Pi).
-3. Run the example script from the root of the repository.
+On Linux systems, the sensor can alternatively be accessed directly through
+the Linux user-space I²C driver.
 
-   By default the script assumes you have the sensor connected to :code:`/dev/i2c-1`.
-   If this is different on your system, pass the port in use with the :code:`--i2c-port` parameter as outlined below.
+1. Connect the SEN66 sensor to an I²C port of your system, for example I²C
+   port 1 of a Raspberry Pi.
 
-   .. sourcecode:: bash
+2. Run the example script from the root of the repository.
+
+   By default, the script assumes that the sensor is connected to
+   ``/dev/i2c-1``. If a different port is used, specify it with the
+   ``--i2c-port`` parameter:
+
+   .. code-block:: console
 
       python examples/example_usage_linux_sen66.py --i2c-port <your I2C port>
 

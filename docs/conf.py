@@ -10,6 +10,8 @@ import sys
 from datetime import datetime
 
 import importlib.metadata as metadata
+import sphinx_tabs.tabs
+
 import sphinx.ext.autodoc
 
 import sensirion_i2c_sen66
@@ -37,6 +39,7 @@ release = distribution.version
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
+    'sphinx_tabs.tabs',
     'sphinx.ext.inheritance_diagram',
     'sphinx.ext.githubpages',
     'sphinx.ext.intersphinx',
